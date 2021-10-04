@@ -1,0 +1,8 @@
+body {
+  background-color: #bbcfff;
+}
+.container {
+  max-width: 846px;
+  justify-content: center;
+  align-items: center;
+}
