@@ -1,7 +1,5 @@
 import { Component } from "react";
 import dom from "react-dom";
-import Homepage from "./Components/Homepage";
-import Summary from "./Components/Summary";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -12,7 +10,7 @@ class App extends Component {
       curr_obj: {},
     };
   }
-  componentDidMount() {
+  componentDidMount = () => {
     if (this.state.Status == "loading") {
       const url = "https://api.tvmaze.com/search/shows?q=all";
       fetch(url, {
@@ -31,9 +29,16 @@ class App extends Component {
             showSummary: this.state.showSummary,
             curr_obj: this.state.curr_obj,
           });
+          let p = document.getElementById("PreLoad");
+          // p.classList.remove(
+          //   "d-flex justify-content-center align-items-center "
+          // );
+          p.style.display = "none";
+          document.getElementById("react-root").style.display = "block";
+          document.querySelector("body").style.overflow = "auto";
         });
     }
-  }
+  };
   click = (id) => {
     let a = this.state.Result.find((val) => {
       return val["show"]["id"] == id;
@@ -54,15 +59,7 @@ class App extends Component {
     });
   };
   render = () => {
-    return (
-      <div className="container">
-        {this.state.showSummary ? (
-          <Summary curr_obj={this.state.curr_obj} back={this.back} />
-        ) : (
-          <Homepage result={this.state.Result} click={this.click} />
-        )}
-      </div>
-    );
+    return <div className="container"></div>;
   };
 }
 dom.render(<App />, document.getElementById("react-root"));
